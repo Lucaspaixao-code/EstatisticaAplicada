@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="card-title">Calculadora de Financiamentos</h2>
+          <form method="get" >
+          <div class="mb-3">
+            <input type="text" class="form-control" name="ValorEmprestimo" placeholder="Valor do Empréstimo">
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" name="ValorEntrada" placeholder="Valor da Entrada">
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" name="TaxaJuros" placeholder="Taxa de Juros (% a.m.)">
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" name="Parcelas" placeholder="Prazo (meses)">
+          </div>
+          <button type="submit" class="btn btn-primary">Calcular</button>
+        </div>
+        </form>
+      </div>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">Parcela Mensal</h3>
+          <p class="card-text">{{valorParcela}}</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Data de Término do Financiamento</h3>
+          <p class="card-text">{{ DataFinal }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="card-title">Comparação de Valores</h2>
+          <canvas id="pie-chart" width="400" height="300"></canvas>
+          <div class="legend mt-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+
+<script>
+  const ctx = document.getElementById('pie-chart').getContext('2d');
+  const value1 = "{{ ValorTotal }}"
+  const value2 = "{{ ValorJuros }}"
+  const data = {
+    labels: ['total', 'Juros'],
+    datasets: [{
+      label: 'Comparação de Valores',
+      data: [value1, value2],
+      backgroundColor: ['#ff6384', '#36a2eb']
+    }]
+  };
+  const config = {
+    type: 'pie',
+    data: data,
+  };
+  const chart = new Chart(ctx, config);
+  const legend = chart.generateLegend();
+  document.querySelector('.legend').innerHTML = legend;
+</script>
+{% endblock %}
+
