@@ -1,50 +1,70 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<div class="container py-5">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card mb-4">
-        <div class="card-body">
-          <h2 class="card-title">Calculadora de Financiamentos</h2>
-          <form method="get" >
-          <div class="mb-3">
-            <input type="text" class="form-control" name="ValorEmprestimo" placeholder="Valor do Empréstimo">
+<div class="content">
+  <div class="container-fluid pt-4 px-4 justify-content">
+    <div class="row g-4">
+      <div class="col-sm-6 col-xl-3">
+          <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fa fa-dollar-sign fa-2x text-primary"></i>
+              <div class="ms-3">
+                  <p class="mb-2">Valor total do Financiamento</p>
+                  <h6 class="mb-0">${{ ValorTotal }}</h6>
+              </div>
           </div>
-          <div class="mb-3">
-            <input type="text" class="form-control" name="ValorEntrada" placeholder="Valor da Entrada">
-          </div>
-          <div class="mb-3">
-            <input type="text" class="form-control" name="TaxaJuros" placeholder="Taxa de Juros (% a.m.)">
-          </div>
-          <div class="mb-3">
-            <input type="text" class="form-control" name="Parcelas" placeholder="Prazo (meses)">
-          </div>
-          <button type="submit" class="btn btn-primary">Calcular</button>
-        </div>
-        </form>
       </div>
-      <div class="card mb-4">
-        <div class="card-body">
-          <h3 class="card-title">Parcela Mensal</h3>
-          <p class="card-text">{{valorParcela}}</p>
-        </div>
+      <div class="col-sm-6 col-xl-3">
+          <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fas fa-university fa-2x text-primary"></i>
+              <div class="ms-3">
+                  <p class="mb-2">Valor total de juros</p>
+                  <h6 class="mb-0">${{ ValorJuros }}</h6>
+              </div>
+          </div>
       </div>
-      <div class="card">
-        <div class="card-body">
-          <h3 class="card-title">Data de Término do Financiamento</h3>
-          <p class="card-text">{{ DataFinal }}</p>
-        </div>
+      <div class="col-sm-6 col-xl-3">
+          <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fa fa-chart-area fa-2x text-primary"></i>
+              <div class="ms-3">
+                  <p class="mb-2">Taxa Aplicada</p>
+                  <h6 class="mb-0">{{ Taxa }} Mês</h6>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-6 col-xl-3">
+          <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+              <i class="fas fa-calendar fa-2x text-primary"></i>
+              <div class="ms-3">
+                  <p class="mb-2">Previsão da Quitação</p>
+                  <h6 class="mb-0">{{ DataFinal }}</h6>
+              </div>
+          </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="card mb-4">
-        <div class="card-body">
-          <h2 class="card-title">Comparação de Valores</h2>
-          <canvas id="pie-chart" width="400" height="300"></canvas>
-          <div class="legend mt-3"></div>
+  </div>
+  <div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+      <div class="col-sm-8 col-xl-4">
+        <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">Valor Total x Juros </h6>
+            <canvas id="pie-chart"></canvas>
         </div>
       </div>
+      <div class="col-sm-8 col-xl-4">
+        <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">Valor Parcela x Juros</h6>
+            <canvas id="pie-chart2"></canvas>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xl-4">
+        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+            <i class="fas fa-coins fa-2x text-primary"></i>
+            <div class="ms-3">
+                <p class="mb-2">Valor Parcela</p>
+                <h6 class="mb-0">${{ valorParcela }}</h6>
+            </div>
+        </div>
+    </div>
     </div>
   </div>
 </div>
@@ -52,24 +72,61 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
 
 <script>
-  const ctx = document.getElementById('pie-chart').getContext('2d');
-  const value1 = "{{ ValorTotal }}"
-  const value2 = "{{ ValorJuros }}"
-  const data = {
-    labels: ['total', 'Juros'],
-    datasets: [{
-      label: 'Comparação de Valores',
-      data: [value1, value2],
-      backgroundColor: ['#ff6384', '#36a2eb']
-    }]
-  };
-  const config = {
-    type: 'pie',
-    data: data,
-  };
-  const chart = new Chart(ctx, config);
-  const legend = chart.generateLegend();
-  document.querySelector('.legend').innerHTML = legend;
-</script>
-{% endblock %}
+    var ctx3 = document.getElementById('line-chart');
+    const total = ConverterArray("{{ ValorTotal }}")
+    const juros = ConverterArray("{{ ValorJuros }}")
 
+    var ctx5 = document.getElementById('pie-chart');
+    var myChart5 = new Chart(ctx5, {
+        type: "pie",
+        data: {
+            labels: ["Total", "Juros"],
+            datasets: [{
+                backgroundColor: [
+                    "rgba(0, 156, 255, .7)",
+                    "rgba(0, 156, 255, .6)"
+                ],
+                data: ["{{ ValorTotalSemJuros }}", "{{ ValorJuros }}"]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+    var ctx6 = document.getElementById('pie-chart2');
+    var myChart6 = new Chart(ctx6, {
+        type: "pie",
+        data: {
+            labels: ["Parcelas", "Juros"],
+            datasets: [{
+                backgroundColor: [
+                    "rgba(0, 156, 255, .7)",
+                    "rgba(0, 156, 255, .6)"
+                ],
+                data: ["{{ valorParcela }}" - "{{ ValorParcelaSemJuros }}","{{ ValorParcelaSemJuros }}"]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+
+    function ConverterArray(array){
+      const trimmedValues = array.slice(1, -1);
+      const Valores = trimmedValues.split(',').map(value => parseFloat(value));
+
+      return Valores.map(item => String(item));
+    }
+
+    function criarArray(numero) {
+      var array = [];
+      for (var i = 1; i <= numero; i++) {
+        array.push(i);
+      }
+    return array;
+  }
+</script>
+
+{% endblock %}

@@ -1,8 +1,69 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light rounded h-100 p-3">
+        <h6 class="mb-4">Calculadora de Financiamentos</h6>
+        <form id="Form" method="get" action="/relatorio/" >
+            <div class="row mb-3">
+                <label for="inputDivida" class="col-sm-2 col-form-label">Divida</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="divida" id="inputDivida" min="1" step="any" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEntrada" class="col-sm-2 col-form-label">Valor da Entrada</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="entrada" id="inputEntrada" min="1" step="any">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputTaxa" class="col-sm-2 col-form-label">Taxa de Juros</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="taxa" id="inputTaxa" min="0.1" step="any" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputParcelas" class="col-sm-2 col-form-label">Qtde. de Parcelas</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="parcelas" id="inputParcelas" min="0.1" step="any" required>
+                </div>
+            </div>
+            <fieldset class="row mb-3">
+                <legend class="col-form-label col-sm-2 pt-0">Tipo de financiamento</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios"
+                            id="gridRadios1" value="1" checked>
+                        <label class="form-check-label" for="gridRadios1">
+                            Imovel
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios"
+                            id="gridRadios2" value="2">
+                        <label class="form-check-label" for="gridRadios2">
+                            Veiculo
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <button id="enviarBtn" type="submit" class="btn btn-primary">Calcular</button>
+        </form>
+    </div>
+</div>
 
-<br>
+<script>
+    document.getElementById('Form').addEventListener('submit', function(event) {
+        event.preventDefault();
+    });
+
+    document.getElementById('enviarBtn').addEventListener('click', function() {
+        var formulario = document.getElementById('Form');
+        
+        formulario.submit();
+    });
+</script>
 
 
 {% endblock %}
