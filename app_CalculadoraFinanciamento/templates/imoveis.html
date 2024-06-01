@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<div class="content">
+<div class="content bg-light">
+    <div class="row g-1">
+        <div class="col-sm-8 col-xl-4 d-flex align-items-center">
+          <i class="fas fa-home fa-2x text-primary me-2"></i>
+          <h5 class="mb-0">Simulação de Financimento para Imóvel</h5>
+        </div>
+      </div>
   <div class="container-fluid pt-4 px-4 justify-content">
     <div class="row g-4">
       <div class="col-sm-6 col-xl-3">
@@ -9,7 +15,7 @@
               <i class="fa fa-dollar-sign fa-2x text-primary"></i>
               <div class="ms-3">
                   <p class="mb-2">Valor total do Financiamento</p>
-                  <h6 class="mb-0">${{ ValorTotal }}</h6>
+                  <h6 class="mb-0">R$ {{ ValorTotal }}</h6>
               </div>
           </div>
       </div>
@@ -18,7 +24,7 @@
               <i class="fas fa-university fa-2x text-primary"></i>
               <div class="ms-3">
                   <p class="mb-2">Valor total de juros</p>
-                  <h6 class="mb-0">${{ ValorJuros }}</h6>
+                  <h6 class="mb-0">R$ {{ ValorJuros }}</h6>
               </div>
           </div>
       </div>
@@ -35,7 +41,7 @@
           <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
               <i class="fas fa-calendar fa-2x text-primary"></i>
               <div class="ms-3">
-                  <p class="mb-2">Previsão da Quitação</p>
+                  <p class="mb-2" text-primary>Previsão da Quitação</p>
                   <h6 class="mb-0">{{ DataFinal }}</h6>
               </div>
           </div>
@@ -46,13 +52,13 @@
     <div class="row g-4">
       <div class="col-sm-12 col-xl-6">
         <div class="bg-light rounded h-100 p-4">
-            <h6 class="mb-4">Parcela Decrescente</h6>
+            <h6 class="mb-4 text-primary">Parcela Decrescente</h6>
             <canvas id="salse-revenue"></canvas>
         </div>
       </div>
       <div class="col-sm-12 col-xl-3">
         <div class="bg-light rounded h-100 p-4">
-            <h6 class="mb-4">Valor Parcela Fixa</h6>
+            <h6 class="mb-4 text-primary">Valor Parcela Fixa</h6>
             <canvas id="pie-chart"></canvas>
         </div>
       </div>
@@ -61,14 +67,14 @@
             <i class="fa fa-dollar-sign fa-2x text-primary"></i>
             <div class="ms-3">
                 <p class="mb-2">Valor Total Fin. Fixa</p>
-                <h6 class="mb-0">{{ ValorTotalFixa }}</h6>
+                <h6 class="mb-0">R$ {{ ValorTotalFixa }}</h6>
             </div>
         </div>
         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 px-4" style="margin-top: 20px;">
           <i class="fas fa-university fa-2x text-primary"></i>
           <div class="ms-3">
               <p class="mb-2">Valor Total Juros Fixa</p>
-              <h6 class="mb-0">{{ ValorTotalJurosFixa }}</h6>
+              <h6 class="mb-0">R$ {{ ValorTotalJurosFixa }}</h6>
           </div>
         </div>
       </div>
@@ -92,14 +98,14 @@
             datasets: [{
                     label : "Juros por Parcela",
                     data: jurosParcela,
-                    backgroundColor: "rgba(0, 156, 255, .5)",
+                    backgroundColor: "#1c3767",
                     fill: true
                 },
                 {
                     label: "Valor por Parcela",
                     data: data,
                     fill: true,
-                    backgroundColor: "rgba(0, 156, 255, .3)",
+                    backgroundColor: "rgb(30,144,255, .4)",
                 }
             ]
             },
@@ -119,9 +125,10 @@
             labels: ["Total", "Juros"],
             datasets: [{
                 backgroundColor: [
-                    "rgba(0, 156, 255, .7)",
-                    "rgba(0, 156, 255, .6)"
+                    "rgb(30,144,255)",
+                    "#1c3767"
                 ],
+                borderWidth: 0, 
                 data: ["{{ ValorParcelaSemJurosFixa }}", "{{ ValorParcelaFixa }}" - "{{ ValorParcelaSemJurosFixa }}"]
             }]
         },
@@ -144,6 +151,8 @@
       }
     return array;
   }
+
+  
 </script>
 
 {% endblock %}

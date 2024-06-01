@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<div class="container-fluid pt-4 px-4">
+<div class="container-fluid pt-4 px-4 bg-light">
     <div class="bg-light rounded h-100 p-3">
         <h6 class="mb-4">Calculadora de Financiamentos</h6>
-        <form id="Form" method="get" action="/relatorio/" >
+        <form id="Form" method="get" action="/relatorio/">
             <div class="row mb-3">
-                <label for="inputDivida" class="col-sm-2 col-form-label">Divida</label>
+                <label for="inputDivida" class="col-sm-2 col-form-label">Valor Financiado</label>
                 <div class="col-sm-10">
                     <input type="number" class="form-control" name="divida" id="inputDivida" min="1" step="any" required>
                 </div>
@@ -14,40 +14,66 @@
             <div class="row mb-3">
                 <label for="inputEntrada" class="col-sm-2 col-form-label">Valor da Entrada</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" name="entrada" id="inputEntrada" min="1" step="any">
+                    <input type="number" class="form-control" name="entrada" id="inputEntrada">
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row mb-3" hidden>
                 <label for="inputTaxa" class="col-sm-2 col-form-label">Taxa de Juros</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" name="taxa" id="inputTaxa" min="0.1" step="any" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputParcelas" class="col-sm-2 col-form-label">Qtde. de Parcelas</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" name="parcelas" id="inputParcelas" min="0.1" step="any" required>
+                    <input type="number" class="form-control" name="taxa" id="inputTaxa" min="0.1" step="any" required value="0.99">
                 </div>
             </div>
             <fieldset class="row mb-3">
                 <legend class="col-form-label col-sm-2 pt-0">Tipo de financiamento</legend>
                 <div class="col-sm-10">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios"
-                            id="gridRadios1" value="1" checked>
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="1" checked>
                         <label class="form-check-label" for="gridRadios1">
                             Imovel
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios"
-                            id="gridRadios2" value="2">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="2">
                         <label class="form-check-label" for="gridRadios2">
                             Veiculo
                         </label>
                     </div>
                 </div>
             </fieldset>
+            <div class="row mb-3">
+                <label for="inputParcelas" class="col-sm-2 col-form-label">Qtde. de Parcelas</label>
+                <div class="col-sm-10">
+                    <div class="btn-group" role="group" aria-label="Basic outlined example" id="ParcVeiculos" style="display: none;">
+                        <input type="radio" class="btn-check" name="parcelas" id="btncheck1" value="12" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btncheck1">12</label>
+
+                        <input type="radio" class="btn-check" name="parcelas" id="btncheck2" value="24" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btncheck2">24</label>
+
+                        <input type="radio" class="btn-check" name="parcelas" id="btncheck3" value="36" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btncheck3">36</label>
+
+                        <input type="radio" class="btn-check" name="parcelas" id="btncheck4" value="48" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btncheck4">48</label>
+
+                        <input type="radio" class="btn-check" name="parcelas" id="btncheck5" value="64" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btncheck5">64</label>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Basic outlined example" id="ParcImovel">
+                        <input type="radio" class="btn-check" name="parcelas" id="btncheck6" value="240" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btncheck6">240</label>
+
+                        <input type="radio" class="btn-check" name="parcelas" id="btncheck7" value="300" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btncheck7">300</label>
+
+                        <input type="radio" class="btn-check" name="parcelas" id="btncheck8" value="360" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btncheck8">360</label>
+
+                        <input type="radio" class="btn-check" name="parcelas" id="btncheck9" value="420" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btncheck9">420</label>
+                    </div>
+                </div>
+            </div>
             <button id="enviarBtn" type="submit" class="btn btn-primary">Calcular</button>
         </form>
     </div>
@@ -59,11 +85,37 @@
     });
 
     document.getElementById('enviarBtn').addEventListener('click', function() {
+        var entrada = document.getElementById("inputEntrada");
+
+        if (entrada.value === "") {
+            entrada.value = 0;
+        }
         var formulario = document.getElementById('Form');
         
         formulario.submit();
     });
-</script>
 
+    const radioImovel = document.getElementById('gridRadios1');
+    const radioVeiculo = document.getElementById('gridRadios2');
+    const ParcVeiculos = document.getElementById('ParcVeiculos');
+    const ParcImovel = document.getElementById('ParcImovel');
+    const inputTaxa = document.getElementById('inputTaxa');
+
+    radioImovel.addEventListener('change', function() {
+        if (radioImovel.checked) {
+            ParcImovel.style.display = 'block';
+            ParcVeiculos.style.display = 'none';
+            inputTaxa.value = 0.99;
+        }
+    });
+
+    radioVeiculo.addEventListener('change', function() {
+        if (radioVeiculo.checked) {
+            ParcVeiculos.style.display = 'block';
+            ParcImovel.style.display = 'none';
+            inputTaxa.value = 1.57;
+        }
+    });
+</script>
 
 {% endblock %}

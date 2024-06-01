@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<div class="content">
+<div class="content bg-light">
+    <div class="row g-1">
+        <div class="col-sm-8 col-xl-4 d-flex align-items-center">
+          <i class="fas fa-home fa-2x text-primary me-2"></i>
+          <h5 class="mb-0">Simulação de Financimento para Veiculo</h5>
+        </div>
+      </div>
   <div class="container-fluid pt-4 px-4 justify-content">
     <div class="row g-4">
       <div class="col-sm-6 col-xl-3">
@@ -83,8 +89,8 @@
             labels: ["Total", "Juros"],
             datasets: [{
                 backgroundColor: [
-                    "rgba(0, 156, 255, .7)",
-                    "rgba(0, 156, 255, .6)"
+                    "rgb(30,144,255)",
+                    "#1c3767"
                 ],
                 data: ["{{ ValorTotalSemJuros }}", "{{ ValorJuros }}"]
             }]
@@ -98,11 +104,11 @@
     var myChart6 = new Chart(ctx6, {
         type: "pie",
         data: {
-            labels: ["Parcelas", "Juros"],
+            labels: ["Juros", "Parcelas"],
             datasets: [{
                 backgroundColor: [
-                    "rgba(0, 156, 255, .7)",
-                    "rgba(0, 156, 255, .6)"
+                    "#1c3767",
+                    "rgba(30,144,255)"
                 ],
                 data: ["{{ valorParcela }}" - "{{ ValorParcelaSemJuros }}","{{ ValorParcelaSemJuros }}"]
             }]
