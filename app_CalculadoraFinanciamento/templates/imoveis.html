@@ -2,121 +2,161 @@
 
 {% block conteudo %}
 <div class="content bg-light">
-    <div class="row g-1">
+    <div class="row g-4">
         <div class="col-sm-8 col-xl-4 d-flex align-items-center">
-          <i class="fas fa-home fa-2x text-primary me-2"></i>
-          <h5 class="mb-0">Simulação de Financimento para Imóvel</h5>
+            <i class="fas fa-home fa-2x text-primary me-2"></i>
+            <h5 class="mb-0">Simulação de Financimento para Imóvel</h5>
         </div>
-      </div>
-  <div class="container-fluid pt-4 px-4 justify-content">
-    <div class="row g-4">
-      <div class="col-sm-6 col-xl-3">
-          <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-              <i class="fa fa-dollar-sign fa-2x text-primary"></i>
-              <div class="ms-3">
-                  <p class="mb-2">Valor total do Financiamento</p>
-                  <h6 class="mb-0">R$ {{ ValorTotal }}</h6>
-              </div>
-          </div>
-      </div>
-      <div class="col-sm-6 col-xl-3">
-          <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-              <i class="fas fa-university fa-2x text-primary"></i>
-              <div class="ms-3">
-                  <p class="mb-2">Valor total de juros</p>
-                  <h6 class="mb-0">R$ {{ ValorJuros }}</h6>
-              </div>
-          </div>
-      </div>
-      <div class="col-sm-6 col-xl-3">
-          <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-              <i class="fa fa-chart-area fa-2x text-primary"></i>
-              <div class="ms-3">
-                  <p class="mb-2">Taxa Aplicada</p>
-                  <h6 class="mb-0">{{ Taxa }} Mês</h6>
-              </div>
-          </div>
-      </div>
-      <div class="col-sm-6 col-xl-3">
-          <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-              <i class="fas fa-calendar fa-2x text-primary"></i>
-              <div class="ms-3">
-                  <p class="mb-2" text-primary>Previsão da Quitação</p>
-                  <h6 class="mb-0">{{ DataFinal }}</h6>
-              </div>
-          </div>
-      </div>
     </div>
-  </div>
-  <div class="container-fluid pt-4 px-4">
-    <div class="row g-4">
-      <div class="col-sm-12 col-xl-6">
-        <div class="bg-light rounded h-100 p-4">
-            <h6 class="mb-4 text-primary">Parcela Decrescente</h6>
-            <canvas id="salse-revenue"></canvas>
-        </div>
-      </div>
-      <div class="col-sm-12 col-xl-3">
-        <div class="bg-light rounded h-100 p-4">
-            <h6 class="mb-4 text-primary">Valor Parcela Fixa</h6>
-            <canvas id="pie-chart"></canvas>
-        </div>
-      </div>
-      <div class="col-sm-6 col-xl-3 line">
-        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-            <i class="fa fa-dollar-sign fa-2x text-primary"></i>
-            <div class="ms-3">
-                <p class="mb-2">Valor Total Fin. Fixa</p>
-                <h6 class="mb-0">R$ {{ ValorTotalFixa }}</h6>
+
+    <div class="container-fluid pt-5 px-4 justify-content col-xl-10">
+        <div class="row g-6">
+            <div class="col-sm-8 col-xl-4">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
+                    <i class="fa fa-dollar-sign fa-2x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Valor Financiado</p>
+                        <h6 class="mb-0">R$ {{ Divida }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 col-xl-4">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
+                    <i class="fas fa-university fa-2x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Valor da Entrada</p>
+                        <h6 class="mb-0">{{ Entrada }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 col-xl-4">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
+                    <i class="fa fa-chart-area fa-2x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Qtde Parcelas</p>
+                        <h6 class="mb-0">{{ qtdeParcelas }}</h6>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 px-4" style="margin-top: 20px;">
-          <i class="fas fa-university fa-2x text-primary"></i>
-          <div class="ms-3">
-              <p class="mb-2">Valor Total Juros Fixa</p>
-              <h6 class="mb-0">R$ {{ ValorTotalJurosFixa }}</h6>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+
+    <div class="container-fluid pt-4 px-4 justify-content col-xl-10">
+        <div class="row g-3">
+            <div class="col-sm-8 col-xl-4">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
+                    <i class="fas fa-university fa-2x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Valor total de juros</p>
+                        <h6 id="valorJuros" class="mb-0">R$ {{ ValorJuros }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 col-xl-4">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
+                    <i class="fa fa-chart-area fa-2x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Taxa Aplicada</p>
+                        <h6 class="mb-0">{{ Taxa }} Mês</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 col-xl-4">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
+                    <i class="fa fa-dollar-sign fa-2x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Previsão de Quitação</p>
+                        <h6 class="mb-0">{{ DataFinal }} Mês</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid pt-4 px-4 justify-content-center col-xl-10">
+        <div class="row g-4 justify-content-center">
+            <div class="col-sm-12">
+                <div class="d-flex justify-content-center mb-4">
+                    <button id="btn-decrescente" class="btn btn-primary me-2" onclick="showGraph('decrescente')">Parcela Decrescente</button>
+                    <button id="btn-fixa" class="btn btn-secondary" onclick="showGraph('fixa')">Parcela Fixa</button>
+                </div>
+            </div>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-sm-12 col-xl-6" id="decrescente-graph">
+                <div class="bg-light rounded h-100 p-4 shadow-sm">
+                    <h6 class="mb-4 text-primary">Parcela Decrescente</h6>
+                    <canvas id="salse-revenue"></canvas>
+                </div>
+            </div>
+            <div class="col-sm-8 col-xl-4" id="fixa-graph" style="display:none;">
+                <div class="bg-light rounded h-100 p-4 shadow-sm">
+                    <h6 class="mb-4 text-primary">Valor Parcela Fixa</h6>
+                    <canvas id="pie-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
 
 <script>
-    const data = ConverterArray("{{ valorParcelas }}")
-    const jurosParcela = ConverterArray("{{ ValorJurosParcela }}")
-    const labels = criarArray("{{ qtdeParcelas }}")
+    function showGraph(type) {
+        document.getElementById('decrescente-graph').style.display = 'none';
+        document.getElementById('fixa-graph').style.display = 'none';
+
+        document.getElementById('btn-decrescente').classList.remove('btn-primary');
+        document.getElementById('btn-decrescente').classList.add('btn-secondary');
+        document.getElementById('btn-fixa').classList.remove('btn-primary');
+        document.getElementById('btn-fixa').classList.add('btn-secondary');
+
+        let valorJuros = document.getElementById('valorJuros');
+
+        if (type === 'decrescente') {
+            document.getElementById('decrescente-graph').style.display = 'block';
+            document.getElementById('btn-decrescente').classList.add('btn-primary');
+            document.getElementById('btn-decrescente').classList.remove('btn-secondary');
+            valorJuros.textContent = `R$ {{ ValorJuros }}`;
+        } else if (type === 'fixa') {
+            document.getElementById('fixa-graph').style.display = 'block';
+            document.getElementById('btn-fixa').classList.add('btn-primary');
+            document.getElementById('btn-fixa').classList.remove('btn-secondary');
+            valorJuros.textContent = `R$ {{ ValorTotalJurosFixa }}`;
+        }
+    }
+
+    const data = ConverterArray("{{ valorParcelas }}");
+    const jurosParcela = ConverterArray("{{ ValorJurosParcela }}");
+    const labels = criarArray("{{ qtdeParcelas }}");
 
     var ctx2 = document.getElementById('salse-revenue');
 
     var myChart2 = new Chart(ctx2, {
-        type: "line", 
+        type: "line",
         data: {
             labels: labels,
             datasets: [{
-                    label : "Juros por Parcela",
-                    data: jurosParcela,
-                    backgroundColor: "#1c3767",
-                    fill: true
-                },
-                {
-                    label: "Valor por Parcela",
-                    data: data,
-                    fill: true,
-                    backgroundColor: "rgb(30,144,255, .4)",
-                }
-            ]
+                label: "Juros por Parcela",
+                data: jurosParcela,
+                backgroundColor: "#1c3767",
+                fill: true
             },
+            {
+                label: "Valor por Parcela",
+                data: data,
+                fill: true,
+                backgroundColor: "rgb(30,144,255, .4)",
+            }]
+        },
         options: {
             responsive: true
         }
     });
 
     var ctx3 = document.getElementById('line-chart');
-    const total = ConverterArray("{{ ValorTotal }}")
-    const juros = ConverterArray("{{ ValorJuros }}")
+    const total = ConverterArray("{{ ValorTotal }}");
+    const juros = ConverterArray("{{ ValorJuros }}");
 
     var ctx5 = document.getElementById('pie-chart');
     var myChart5 = new Chart(ctx5, {
@@ -128,7 +168,7 @@
                     "rgb(30,144,255)",
                     "#1c3767"
                 ],
-                borderWidth: 0, 
+                borderWidth: 0,
                 data: ["{{ ValorParcelaSemJurosFixa }}", "{{ ValorParcelaFixa }}" - "{{ ValorParcelaSemJurosFixa }}"]
             }]
         },
@@ -137,22 +177,20 @@
         }
     });
 
-    function ConverterArray(array){
-      const trimmedValues = array.slice(1, -1);
-      const Valores = trimmedValues.split(',').map(value => parseFloat(value));
+    function ConverterArray(array) {
+        const trimmedValues = array.slice(1, -1);
+        const Valores = trimmedValues.split(',').map(value => parseFloat(value));
 
-      return Valores.map(item => String(item));
+        return Valores.map(item => String(item));
     }
 
     function criarArray(numero) {
-      var array = [];
-      for (var i = 1; i <= numero; i++) {
-        array.push(i);
-      }
-    return array;
-  }
-
-  
+        var array = [];
+        for (var i = 1; i <= numero; i++) {
+            array.push(i);
+        }
+        return array;
+    }
 </script>
 
 {% endblock %}

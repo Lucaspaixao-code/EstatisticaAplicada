@@ -2,7 +2,7 @@
 
 {% block conteudo %}
 <div class="container-fluid pt-4 px-4 bg-light">
-    <div class="bg-light rounded h-100 p-3">
+    <div class="bg-light rounded h-100 p-3 shadow-sm">
         <h6 class="mb-4">Calculadora de Financiamentos</h6>
         <form id="Form" method="get" action="/relatorio/">
             <div class="row mb-3">
@@ -42,9 +42,9 @@
             </fieldset>
             <div class="row mb-3">
                 <label for="inputParcelas" class="col-sm-2 col-form-label">Qtde. de Parcelas</label>
-                <div class="col-sm-10">
+                <div class="col-sm-10 d-flex">
                     <div class="btn-group" role="group" aria-label="Basic outlined example" id="ParcVeiculos" style="display: none;">
-                        <input type="radio" class="btn-check" name="parcelas" id="btncheck1" value="12" autocomplete="off">
+                        <input type="radio" class="btn-check" name="parcelas" id="btncheck1" value="12" autocomplete="off" checked>
                         <label class="btn btn-outline-primary" for="btncheck1">12</label>
 
                         <input type="radio" class="btn-check" name="parcelas" id="btncheck2" value="24" autocomplete="off">
@@ -60,7 +60,7 @@
                         <label class="btn btn-outline-primary" for="btncheck5">64</label>
                     </div>
                     <div class="btn-group" role="group" aria-label="Basic outlined example" id="ParcImovel">
-                        <input type="radio" class="btn-check" name="parcelas" id="btncheck6" value="240" autocomplete="off">
+                        <input type="radio" class="btn-check" name="parcelas" id="btncheck6" value="240" autocomplete="off" checked>
                         <label class="btn btn-outline-primary" for="btncheck6">240</label>
 
                         <input type="radio" class="btn-check" name="parcelas" id="btncheck7" value="300" autocomplete="off">
