@@ -16,7 +16,7 @@
                     <i class="fa fa-dollar-sign fa-2x text-primary"></i>
                     <div class="ms-3 text-end">
                         <p class="mb-2">Valor da Compra</p>
-                        <h6 class="mb-0">R$ {{ valorCompra }}</h6>
+                        <h6 class="mb-0">{{ valorCompra }}</h6>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     <i class="fa fa-dollar-sign fa-2x text-primary"></i>
                     <div class="ms-3 text-end">
                         <p class="mb-2">Valor Financiado</p>
-                        <h6 class="mb-0">R$ {{ Divida }}</h6>
+                        <h6 class="mb-0">{{ Divida }}</h6>
                     </div>
                 </div>
             </div>
@@ -47,8 +47,8 @@
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
                     <i class="fa fa-dollar-sign fa-2x text-primary"></i>
                     <div class="ms-3 text-end">
-                        <p class="mb-2">Valor total do Financiamento</p>
-                        <h6 class="mb-0">R$ {{ ValorTotal }}</h6>
+                        <p class="mb-2">Valor Total do Financiamento</p>
+                        <h6 class="mb-0">  {{ ValorTotal }}</h6>
                     </div>
                 </div>
             </div>
@@ -56,8 +56,8 @@
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
                     <i class="fas fa-university fa-2x text-primary"></i>
                     <div class="ms-3 text-end">
-                        <p class="mb-2">Valor total de juros</p>
-                        <h6 class="mb-0">R$ {{ ValorJuros }}</h6>
+                        <p class="mb-2">Valor Total de Juros</p>
+                        <h6 class="mb-0">  {{ ValorJuros }}</h6>
                     </div>
                 </div>
             </div>
@@ -76,13 +76,13 @@
     <div class="row g-5">
         <div class="col-sm-8 col-xl-4">
             <div class="bg-light rounded h-100 p-4 shadow-sm">
-                <h6 class="mb-4">Valor Total x Juros </h6>
+                <h6 class="mb-4">Valor Total Pago x Juros </h6>
                 <canvas id="pie-chart"></canvas>
             </div>
           </div>
           <div class="col-sm-8 col-xl-4">
             <div class="bg-light rounded h-100 p-4 shadow-sm">
-                <h6 class="mb-4">Valor Parcela x Juros</h6>
+                <h6 class="mb-4">Valor Parcela x Juros da Parcela</h6>
                 <canvas id="pie-chart2"></canvas>
             </div>
           </div>
@@ -91,13 +91,13 @@
             <i class="fas fa-coins fa-2x text-primary"></i>
             <div class="ms-3 text-end">
                 <p class="mb-2">Valor Parcela</p>
-                <h6 class="mb-0">R$ {{ valorParcela }}</h6>
+                <h6 class="mb-0">  {{ valorParcela }}</h6>
             </div>
         </div>
         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm mb-4">
             <i class="fa fa-chart-area fa-2x text-primary"></i>
             <div class="ms-3 text-end">
-                <p class="mb-2">Qtde Parcelas</p>
+                <p class="mb-2">Quantidade Parcelas</p>
                 <h6 class="mb-0">{{ qtdeParcelas }}</h6>
             </div>
         </div>

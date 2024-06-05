@@ -15,8 +15,8 @@
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
                     <i class="fa fa-dollar-sign fa-2x text-primary"></i>
                     <div class="ms-3 text-end">
-                        <p class="mb-2">Valor Compra</p>
-                        <h6 class="mb-0">R$ {{ valorCompra }}</h6>
+                        <p class="mb-2">Valor da Compra</p>
+                        <h6 class="mb-0">  {{ valorCompra }}</h6>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     <i class="fa fa-dollar-sign fa-2x text-primary"></i>
                     <div class="ms-3 text-end">
                         <p class="mb-2">Valor Financiado</p>
-                        <h6 class="mb-0">R$ {{ Divida }}</h6>
+                        <h6 class="mb-0">{{ Divida }}</h6>
                     </div>
                 </div>
             </div>
@@ -47,8 +47,8 @@
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
                     <i class="fas fa-dollar-sign fa-2x text-primary"></i>
                     <div class="ms-3 text-end">
-                        <p class="mb-2">Valor total do Financiamento</p>
-                        <h6 id="valorTotalFin" class="mb-0">R$ {{ ValorTotal }}</h6>
+                        <p class="mb-2">Valor Total do Financiamento</p>
+                        <h6 id="valorTotalFin" class="mb-0">  {{ ValorTotal }}</h6>
                     </div>
                 </div>
             </div>
@@ -56,8 +56,8 @@
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
                     <i class="fas fa-university fa-2x text-primary"></i>
                     <div class="ms-3 text-end">
-                        <p class="mb-2">Valor total de juros</p>
-                        <h6 id="valorJuros" class="mb-0">R$ {{ ValorJuros }}</h6>
+                        <p class="mb-2">Valor Total de Juros</p>
+                        <h6 id="valorJuros" class="mb-0">  {{ ValorJuros }}</h6>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                         <canvas id="salse-revenue"></canvas>
                     </div>
                     <div id="fixa-graph" style="display:none;">
-                        <h6 class="mb-4 text-primary">Valor Parcela Fixa</h6>
+                        <h6 class="mb-4 text-primary">Parcela Fixa</h6>
                         <div id="pie-chart-container" style="width: 450px; height: 450px; margin: 0 auto;">
                             <canvas id="pie-chart"></canvas>
                         </div>
@@ -98,7 +98,7 @@
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm mb-4">
                     <i class="fa fa-chart-area fa-2x text-primary"></i>
                     <div class="ms-3 text-end">
-                        <p class="mb-2">Qtde Parcelas</p>
+                        <p class="mb-2">Quantidade Parcelas</p>
                         <h6 class="mb-0">{{ qtdeParcelas }}</h6>
                     </div>
                 </div>
@@ -136,14 +136,14 @@
             document.getElementById('decrescente-graph').style.display = 'block';
             document.getElementById('btn-decrescente').classList.add('btn-primary');
             document.getElementById('btn-decrescente').classList.remove('btn-secondary');
-            valorJuros.textContent = `R$ {{ ValorJuros }}`;
-            valorTotalFin.textContent = `R$ {{ ValorTotal }}`;
+            valorJuros.textContent = `  {{ ValorJuros }}`;
+            valorTotalFin.textContent = `  {{ ValorTotal }}`;
         } else if (type === 'fixa') {
             document.getElementById('fixa-graph').style.display = 'block';
             document.getElementById('btn-fixa').classList.add('btn-primary');
             document.getElementById('btn-fixa').classList.remove('btn-secondary');
-            valorJuros.textContent = `R$ {{ ValorTotalJurosFixa }}`;
-            valorTotalFin.textContent = `R$ {{ ValorTotalFixa }}`;
+            valorJuros.textContent = `  {{ ValorTotalJurosFixa }}`;
+            valorTotalFin.textContent = `  {{ ValorTotalFixa }}`;
         }
     }
 
