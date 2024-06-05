@@ -22,6 +22,8 @@ def relatorio(request):
                                                 'ValorTotal': formatar_monetario(sum(imovel.calcular_valor_parcela())),
                                                 'ValorTotalFixa': formatar_monetario(imovel.CalcularValorParcelaFixa() * imovel.periodo),
                                                 'ValorTotalJurosFixa': formatar_monetario((imovel.CalcularValorParcelaFixa() * imovel.periodo) - imovel.calcular_valor_financiado()),
+                                                'ValorParcelaFixaGraf': imovel.CalcularValorParcelaFixa(),
+                                                'ValorParcelaSemJurosFixaGraf': imovel.ValorParcelaSemJurosFixa(),
                                                 'ValorJuros': formatar_monetario(sum(imovel.calcular_valor_parcela()) - float(imovel.calcular_valor_financiado())),
                                                 'DataFinal': (add_months(datetime.date.today(), imovel.periodo)).strftime("%m/%Y"),
                                                 'qtdeParcelas': int(request.GET.get('parcelas')),
@@ -33,8 +35,10 @@ def relatorio(request):
         veiculo = Veiculo(int(request.GET.get('divida')), int(request.GET.get('entrada')), int(request.GET.get('parcelas')),float(request.GET.get('taxa')))
 
         return render(request, 'veiculos.html',{'valorParcela': formatar_monetario(veiculo.calcular_valor_parcela()), 
+                                                'valorParcelaGraf': veiculo.calcular_valor_parcela(),
                                                 'ValorParcelaSemJuros': veiculo.ValorParcelaSemJuros(),
                                                 'ValorTotal': formatar_monetario(veiculo.calcular_valor_parcela()*veiculo.qtde_parcela),
+                                                'ValorJurosGraf': (veiculo.calcular_valor_parcela()*veiculo.qtde_parcela) - veiculo.calcular_valor_financiado(),
                                                 'ValorTotalSemJuros': veiculo.calcular_valor_financiado(),
                                                 'ValorJuros': formatar_monetario((veiculo.calcular_valor_parcela()*veiculo.qtde_parcela) - veiculo.calcular_valor_financiado()),
                                                 'DataFinal': (add_months(datetime.date.today(), veiculo.qtde_parcela)).strftime("%m/%Y"),
