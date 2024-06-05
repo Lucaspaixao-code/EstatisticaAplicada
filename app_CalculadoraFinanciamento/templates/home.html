@@ -130,11 +130,15 @@
     const inputEntrada = document.getElementById('inputEntrada');
 
     inputDivida.addEventListener('change', function() {
-        this.value = formatarMonetario(this.value);
+        if(this.value > 0){
+            this.value = formatarMonetario(this.value);
+        }
     });
 
     inputEntrada.addEventListener('change', function() {
-        this.value = formatarMonetario(this.value);
+        if(this.value > 0){
+            this.value = formatarMonetario(this.value);
+        }
     });
 
     inputDivida.addEventListener('click', function() {
