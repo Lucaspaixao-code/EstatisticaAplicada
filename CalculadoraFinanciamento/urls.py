@@ -5,7 +5,5 @@ from app_CalculadoraFinanciamento import views
 urlpatterns = [
     path('', RedirectView.as_view(url='home', permanent=True)),
     path('home/', views.home, name='home'),
-    ##path('veiculo/', views.veiculo, name='veiculo'),
-    ##path('imovel/', views.imovel, name='imovel'),
     path('relatorio/', views.relatorio, name='relatorio')
 ]
