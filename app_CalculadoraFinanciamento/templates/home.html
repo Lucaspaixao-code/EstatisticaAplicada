@@ -86,10 +86,16 @@
 
     document.getElementById('enviarBtn').addEventListener('click', function() {
         var entrada = document.getElementById("inputEntrada");
+        var inputDivida = document.getElementById('inputDivida');
+        var inputEntrada = document.getElementById('inputEntrada');
 
         if (entrada.value === "") {
             entrada.value = 0;
         }
+
+        inputDivida.value = inputDivida.value.replace(/[^\d,]/g, '').replace('.','').replace(',', '.');
+        inputEntrada.value = inputEntrada.value.replace(/[^\d,]/g, '').replace('.','').replace(',', '.');
+
         var formulario = document.getElementById('Form');
         
         formulario.submit();

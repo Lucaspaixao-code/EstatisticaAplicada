@@ -14,7 +14,7 @@ def relatorio(request):
     tipo = int(request.GET.get('gridRadios'))
     
     if tipo == 1:   
-        imovel = Imovel(int(request.GET.get('divida')), int(request.GET.get('parcelas')), float(request.GET.get('taxa')), int(request.GET.get('entrada')))
+        imovel = Imovel(float(request.GET.get('divida')), int(request.GET.get('parcelas')), float(request.GET.get('taxa')), float(request.GET.get('entrada')))
         return render(request, 'imoveis.html',{ 'ValorParcelaSemJurosFixa': formatar_monetario(imovel.ValorParcelaSemJurosFixa()),
                                                 'ValorParcelaFixa': formatar_monetario(imovel.CalcularValorParcelaFixa()),
                                                 'valorParcelas': imovel.calcular_valor_parcela(), 
@@ -32,7 +32,7 @@ def relatorio(request):
                                                 'valorCompra': formatar_monetario(imovel.divida),
                                                 'Entrada': formatar_monetario(imovel.entrada) if imovel.entrada > 0 else 'Sem Entrada'})
     else:
-        veiculo = Veiculo(int(request.GET.get('divida')), int(request.GET.get('entrada')), int(request.GET.get('parcelas')),float(request.GET.get('taxa')))
+        veiculo = Veiculo(float(request.GET.get('divida')), float(request.GET.get('entrada')), int(request.GET.get('parcelas')),float(request.GET.get('taxa')))
 
         return render(request, 'veiculos.html',{'valorParcela': formatar_monetario(veiculo.calcular_valor_parcela()), 
                                                 'valorParcelaGraf': veiculo.calcular_valor_parcela(),
