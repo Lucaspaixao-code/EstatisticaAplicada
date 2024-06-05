@@ -5,7 +5,7 @@
     <div class="row g-1">
         <div class="col-sm-8 col-xl-4 d-flex align-items-center">
           <i class="fas fa-car fa-2x text-primary me-2"></i>
-          <h5 class="mb-0">Simulação de Financimento para Veiculo</h5>
+          <h5 class="mb-0">Simulação de Financiamento para Veículo</h5>
         </div>
       </div>
 
@@ -14,16 +14,16 @@
             <div class="col-sm-8 col-xl-4">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
                     <i class="fa fa-dollar-sign fa-2x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Valor Financiado</p>
-                        <h6 class="mb-0">R$ {{ Divida }}</h6>
+                    <div class="ms-3 text-end">
+                        <p class="mb-2">Valor da Compra</p>
+                        <h6 class="mb-0">R$ {{ valorCompra }}</h6>
                     </div>
                 </div>
             </div>
             <div class="col-sm-8 col-xl-4">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
-                    <i class="fas fa-university fa-2x text-primary"></i>
-                    <div class="ms-3">
+                    <i class="fas fa-dollar-sign fa-2x text-primary"></i>
+                    <div class="ms-3 text-end">
                         <p class="mb-2">Valor da Entrada</p>
                         <h6 class="mb-0">{{ Entrada }}</h6>
                     </div>
@@ -31,10 +31,10 @@
             </div>
             <div class="col-sm-8 col-xl-4">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
-                    <i class="fa fa-chart-area fa-2x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Qtde Parcelas</p>
-                        <h6 class="mb-0">{{ qtdeParcelas }}</h6>
+                    <i class="fa fa-dollar-sign fa-2x text-primary"></i>
+                    <div class="ms-3 text-end">
+                        <p class="mb-2">Valor Financiado</p>
+                        <h6 class="mb-0">R$ {{ Divida }}</h6>
                     </div>
                 </div>
             </div>
@@ -46,25 +46,25 @@
             <div class="col-sm-8 col-xl-4">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
                     <i class="fa fa-dollar-sign fa-2x text-primary"></i>
-                    <div class="ms-3">
+                    <div class="ms-3 text-end">
                         <p class="mb-2">Valor total do Financiamento</p>
-                        <h6 class="mb-0">${{ ValorTotal }}</h6>
+                        <h6 class="mb-0">R${{ ValorTotal }}</h6>
                     </div>
                 </div>
             </div>
             <div class="col-sm-8 col-xl-4">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
                     <i class="fas fa-university fa-2x text-primary"></i>
-                    <div class="ms-3">
+                    <div class="ms-3 text-end">
                         <p class="mb-2">Valor total de juros</p>
-                        <h6 class="mb-0">${{ ValorJuros }}</h6>
+                        <h6 class="mb-0">R${{ ValorJuros }}</h6>
                     </div>
                 </div>
             </div>
             <div class="col-sm-8 col-xl-4">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
                     <i class="fa fa-chart-area fa-2x text-primary"></i>
-                    <div class="ms-3">
+                    <div class="ms-3 text-end">
                         <p class="mb-2">Taxa Aplicada</p>
                         <h6 class="mb-0">{{ Taxa }} Mês</h6>
                     </div>
@@ -74,29 +74,36 @@
     </div>
   <div class="container-fluid pt-5 px-4 justify-content col-xl-10 ">
     <div class="row g-5">
-      <div class="col-sm-8 col-xl-4">
-        <div class="bg-light rounded h-100 p-4 shadow-sm">
-            <h6 class="mb-4">Valor Total x Juros </h6>
-            <canvas id="pie-chart"></canvas>
-        </div>
-      </div>
-      <div class="col-sm-8 col-xl-4">
-        <div class="bg-light rounded h-100 p-4 shadow-sm">
-            <h6 class="mb-4">Valor Parcela x Juros</h6>
-            <canvas id="pie-chart2"></canvas>
-        </div>
-      </div>
+        <div class="col-sm-8 col-xl-4">
+            <div class="bg-light rounded h-100 p-4 shadow-sm">
+                <h6 class="mb-4">Valor Total x Juros </h6>
+                <canvas id="pie-chart"></canvas>
+            </div>
+          </div>
+          <div class="col-sm-8 col-xl-4">
+            <div class="bg-light rounded h-100 p-4 shadow-sm">
+                <h6 class="mb-4">Valor Parcela x Juros</h6>
+                <canvas id="pie-chart2"></canvas>
+            </div>
+          </div>
       <div class="col-sm-6 col-xl-4">
         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm mb-4">
             <i class="fas fa-coins fa-2x text-primary"></i>
-            <div class="ms-3">
+            <div class="ms-3 text-end">
                 <p class="mb-2">Valor Parcela</p>
-                <h6 class="mb-0">${{ valorParcela }}</h6>
+                <h6 class="mb-0">R${{ valorParcela }}</h6>
+            </div>
+        </div>
+        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm mb-4">
+            <i class="fa fa-chart-area fa-2x text-primary"></i>
+            <div class="ms-3 text-end">
+                <p class="mb-2">Qtde Parcelas</p>
+                <h6 class="mb-0">{{ qtdeParcelas }}</h6>
             </div>
         </div>
         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm mb-4">
             <i class="fas fa-calendar fa-2x text-primary"></i>
-            <div class="ms-3">
+            <div class="ms-3 text-end">
                 <p class="mb-2">Previsão da Quitação</p>
                 <h6 class="mb-0">{{ DataFinal }}</h6>
             </div>

@@ -26,7 +26,8 @@ def relatorio(request):
                                                 'DataFinal': (add_months(datetime.date.today(), imovel.periodo)).strftime("%m/%Y"),
                                                 'qtdeParcelas': int(request.GET.get('parcelas')),
                                                 'Taxa': imovel.taxa,
-                                                'Divida': imovel.divida,
+                                                'Divida': imovel.divida - imovel.entrada,
+                                                'valorCompra': imovel.divida,
                                                 'Entrada': 'R$'+str(imovel.entrada) if imovel.entrada > 0 else 'Sem Entrada'})
     else:
         veiculo = Veiculo(int(request.GET.get('divida')), int(request.GET.get('entrada')), int(request.GET.get('parcelas')),float(request.GET.get('taxa')))
@@ -38,9 +39,10 @@ def relatorio(request):
                                                 'ValorJuros': "{:.2f}".format((veiculo.calcular_valor_parcela()*veiculo.qtde_parcela) - veiculo.calcular_valor_financiado()),
                                                 'DataFinal': (add_months(datetime.date.today(), veiculo.qtde_parcela)).strftime("%m/%Y"),
                                                 'Taxa': veiculo.taxa_juros,
-                                                'Divida': veiculo.valor,
+                                                'Divida': veiculo.valor - veiculo.valor_entrada,
                                                 'Entrada': 'R$'+str(veiculo.valor_entrada) if veiculo.valor_entrada > 0 else 'Sem Entrada',
-                                                'qtdeParcelas': int(request.GET.get('parcelas'))})
+                                                'qtdeParcelas': int(request.GET.get('parcelas')),
+                                                'valorCompra': veiculo.valor})
     
 def add_months(base_date=None, months_to_add=1):
     if months_to_add == 0:

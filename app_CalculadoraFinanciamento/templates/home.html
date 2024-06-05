@@ -6,7 +6,7 @@
         <h6 class="mb-4">Calculadora de Financiamentos</h6>
         <form id="Form" method="get" action="/relatorio/">
             <div class="row mb-3">
-                <label for="inputDivida" class="col-sm-2 col-form-label">Valor Financiado</label>
+                <label for="inputDivida" class="col-sm-2 col-form-label">Valor Total da Compra</label>
                 <div class="col-sm-10">
                     <input type="number" class="form-control" name="divida" id="inputDivida" min="1" step="any" required>
                 </div>
@@ -29,13 +29,13 @@
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="1" checked>
                         <label class="form-check-label" for="gridRadios1">
-                            Imovel
+                            Imóvel
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="2">
                         <label class="form-check-label" for="gridRadios2">
-                            Veiculo
+                            Veículo
                         </label>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                         <input type="radio" class="btn-check" name="parcelas" id="btncheck5" value="64" autocomplete="off">
                         <label class="btn btn-outline-primary" for="btncheck5">64</label>
                     </div>
-                    <div class="btn-group" role="group" aria-label="Basic outlined example" id="ParcImovel">
+                    <div class="btn-group" role="group" aria-label="Basic outlined example" id="ParcImovel" style="display: block;">
                         <input type="radio" class="btn-check" name="parcelas" id="btncheck6" value="240" autocomplete="off" checked>
                         <label class="btn btn-outline-primary" for="btncheck6">240</label>
 

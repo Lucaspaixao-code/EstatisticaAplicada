@@ -5,7 +5,7 @@
     <div class="row g-4">
         <div class="col-sm-8 col-xl-4 d-flex align-items-center">
             <i class="fas fa-home fa-2x text-primary me-2"></i>
-            <h5 class="mb-0">Simulação de Financimento para Imóvel</h5>
+            <h5 class="mb-0">Simulação de Financiamento para Imóvel</h5>
         </div>
     </div>
 
@@ -14,16 +14,16 @@
             <div class="col-sm-8 col-xl-4">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
                     <i class="fa fa-dollar-sign fa-2x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Valor Financiado</p>
-                        <h6 class="mb-0">R$ {{ Divida }}</h6>
+                    <div class="ms-3 text-end">
+                        <p class="mb-2">Valor Compra</p>
+                        <h6 class="mb-0">R$ {{ valorCompra }}</h6>
                     </div>
                 </div>
             </div>
             <div class="col-sm-8 col-xl-4">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
-                    <i class="fas fa-university fa-2x text-primary"></i>
-                    <div class="ms-3">
+                    <i class="fas fa-dollar-sign fa-2x text-primary"></i>
+                    <div class="ms-3 text-end">
                         <p class="mb-2">Valor da Entrada</p>
                         <h6 class="mb-0">{{ Entrada }}</h6>
                     </div>
@@ -31,10 +31,10 @@
             </div>
             <div class="col-sm-8 col-xl-4">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
-                    <i class="fa fa-chart-area fa-2x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Qtde Parcelas</p>
-                        <h6 class="mb-0">{{ qtdeParcelas }}</h6>
+                    <i class="fa fa-dollar-sign fa-2x text-primary"></i>
+                    <div class="ms-3 text-end">
+                        <p class="mb-2">Valor Financiado</p>
+                        <h6 class="mb-0">{{ Divida  }}</h6>
                     </div>
                 </div>
             </div>
@@ -45,8 +45,17 @@
         <div class="row g-3">
             <div class="col-sm-8 col-xl-4">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
+                    <i class="fas fa-dollar-sign fa-2x text-primary"></i>
+                    <div class="ms-3 text-end">
+                        <p class="mb-2">Valor total do Financiamento</p>
+                        <h6 id="valorTotalFin" class="mb-0">R$ {{ ValorTotal }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 col-xl-4">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
                     <i class="fas fa-university fa-2x text-primary"></i>
-                    <div class="ms-3">
+                    <div class="ms-3 text-end">
                         <p class="mb-2">Valor total de juros</p>
                         <h6 id="valorJuros" class="mb-0">R$ {{ ValorJuros }}</h6>
                     </div>
@@ -55,48 +64,57 @@
             <div class="col-sm-8 col-xl-4">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
                     <i class="fa fa-chart-area fa-2x text-primary"></i>
-                    <div class="ms-3">
+                    <div class="ms-3 text-end">
                         <p class="mb-2">Taxa Aplicada</p>
                         <h6 class="mb-0">{{ Taxa }} Mês</h6>
                     </div>
                 </div>
             </div>
+            
+        </div>
+    </div>
+
+    <div class="container-fluid pt-5 px-4 col-xl-10">
+        <div class="row g-5 justify-content-center">
+            <div class="col-sm-12 col-xl-8">
+                <div class="bg-light rounded h-100 p-4 shadow-sm">
+                    <div class="d-flex justify-content-center mb-4">
+                        <button id="btn-decrescente" class="btn btn-primary me-2" onclick="showGraph('decrescente')">Parcela Decrescente</button>
+                        <button id="btn-fixa" class="btn btn-secondary" onclick="showGraph('fixa')">Parcela Fixa</button>
+                    </div>
+                    <div id="decrescente-graph">
+                        <h6 class="mb-4 text-primary">Parcela Decrescente</h6>
+                        <canvas id="salse-revenue"></canvas>
+                    </div>
+                    <div id="fixa-graph" style="display:none;">
+                        <h6 class="mb-4 text-primary">Valor Parcela Fixa</h6>
+                        <div id="pie-chart-container" style="width: 450px; height: 450px; margin: 0 auto;">
+                            <canvas id="pie-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-sm-8 col-xl-4">
-                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm">
-                    <i class="fa fa-dollar-sign fa-2x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Previsão de Quitação</p>
-                        <h6 class="mb-0">{{ DataFinal }} Mês</h6>
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm mb-4">
+                    <i class="fa fa-chart-area fa-2x text-primary"></i>
+                    <div class="ms-3 text-end">
+                        <p class="mb-2">Qtde Parcelas</p>
+                        <h6 class="mb-0">{{ qtdeParcelas }}</h6>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-12">
+                    <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm mb-4">
+                        <i class="fa fa-calendar fa-2x text-primary"></i>
+                        <div class="ms-3 text-end">
+                            <p class="mb-2">Previsão de Quitação</p>
+                            <h6 class="mb-0">{{ DataFinal }}</h6>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="container-fluid pt-4 px-4 justify-content-center col-xl-10">
-        <div class="row g-4 justify-content-center">
-            <div class="col-sm-12">
-                <div class="d-flex justify-content-center mb-4">
-                    <button id="btn-decrescente" class="btn btn-primary me-2" onclick="showGraph('decrescente')">Parcela Decrescente</button>
-                    <button id="btn-fixa" class="btn btn-secondary" onclick="showGraph('fixa')">Parcela Fixa</button>
-                </div>
-            </div>
-        </div>
-        <div class="row g-4 justify-content-center">
-            <div class="col-sm-12 col-xl-6" id="decrescente-graph">
-                <div class="bg-light rounded h-100 p-4 shadow-sm">
-                    <h6 class="mb-4 text-primary">Parcela Decrescente</h6>
-                    <canvas id="salse-revenue"></canvas>
-                </div>
-            </div>
-            <div class="col-sm-8 col-xl-4" id="fixa-graph" style="display:none;">
-                <div class="bg-light rounded h-100 p-4 shadow-sm">
-                    <h6 class="mb-4 text-primary">Valor Parcela Fixa</h6>
-                    <canvas id="pie-chart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
@@ -112,17 +130,20 @@
         document.getElementById('btn-fixa').classList.add('btn-secondary');
 
         let valorJuros = document.getElementById('valorJuros');
+        let valorTotalFin = document.getElementById('valorTotalFin');
 
         if (type === 'decrescente') {
             document.getElementById('decrescente-graph').style.display = 'block';
             document.getElementById('btn-decrescente').classList.add('btn-primary');
             document.getElementById('btn-decrescente').classList.remove('btn-secondary');
             valorJuros.textContent = `R$ {{ ValorJuros }}`;
+            valorTotalFin.textContent = `R$ {{ ValorTotal }}`;
         } else if (type === 'fixa') {
             document.getElementById('fixa-graph').style.display = 'block';
             document.getElementById('btn-fixa').classList.add('btn-primary');
             document.getElementById('btn-fixa').classList.remove('btn-secondary');
             valorJuros.textContent = `R$ {{ ValorTotalJurosFixa }}`;
+            valorTotalFin.textContent = `R$ {{ ValorTotalFixa }}`;
         }
     }
 
