@@ -8,13 +8,13 @@
             <div class="row mb-3">
                 <label for="inputDivida" class="col-sm-2 col-form-label">Valor da Compra</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" name="divida" id="inputDivida" min="1" step="any" required>
+                    <input type="text" class="form-control" name="divida" id="inputDivida" min="1" step="any" required>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="inputEntrada" class="col-sm-2 col-form-label">Valor da Entrada</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" name="entrada" id="inputEntrada">
+                    <input type="text" class="form-control" name="entrada" id="inputEntrada">
                 </div>
             </div>
             <div class="row mb-3" hidden>
@@ -115,6 +115,42 @@
             ParcImovel.style.display = 'none';
             inputTaxa.value = 1.57;
         }
+    });
+
+        
+    function formatarMonetario(valor) {
+        const valorFormatado = parseFloat(valor).toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+        return valorFormatado;
+    }
+
+    const inputDivida = document.getElementById('inputDivida');
+    const inputEntrada = document.getElementById('inputEntrada');
+
+    inputDivida.addEventListener('change', function() {
+        this.value = formatarMonetario(this.value);
+    });
+
+    inputEntrada.addEventListener('change', function() {
+        this.value = formatarMonetario(this.value);
+    });
+
+    inputDivida.addEventListener('click', function() {
+        this.select();
+    });
+
+    inputEntrada.addEventListener('click', function() {
+        this.select();
+    });
+
+    inputDivida.addEventListener('input', function() {
+        this.value = this.value.replace(/[^\d.,-]/g, '');
+    });
+
+    inputEntrada.addEventListener('input', function() {
+        this.value = this.value.replace(/[^\d.,-]/g, '');
     });
 </script>
 
